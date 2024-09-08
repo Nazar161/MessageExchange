@@ -1,0 +1,17 @@
+@{
+    ViewData["Title"] = "Send Message";
+}
+
+<h1>Send Message</h1>
+
+<form method="post" asp-action="SendMessage">
+    <div class="form-group">
+        <label for="content">Message Content (max 128 chars):</label>
+        <input type="text" id="content" name="content" class="form-control" maxlength="128" required>
+    </div>
+    <div class="form-group">
+        <label for="orderNumber">Order Number:</label>
+        <input type="number" id="orderNumber" name="orderNumber" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Send</button>
+</form>

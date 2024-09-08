@@ -1,0 +1,26 @@
+@{
+ViewData["Title"] = "Real-Time Messages";
+}
+
+<h1>Real-Time Messages</h1>
+<ul id="messagesList"></ul>
+
+@section Scripts {
+    <script src="~/js/signalr/dist/browser/signalr.js"></script>
+    <script>
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/messageHub") 
+        .build();
+    
+    connection.on("ReceiveMessage", function (message) {
+        const li = document.createElement("li");
+        const date = new Date(message.timestamp)
+        li.textContent = `Order: ${message.orderNumber} - ${date.toLocaleString()} - ${message.content}`;
+        document.getElementById("messagesList").appendChild(li);
+    });
+    
+    connection.start().catch(function (err) {
+        return console.error(err.toString());
+    });
+</script>
+}
